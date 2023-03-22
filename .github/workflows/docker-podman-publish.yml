@@ -67,7 +67,7 @@ jobs:
           #images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           images: 
             ${{ github.repository }}
-            ghcr.io/${{ env.IMAGE_NAME }}
+            ghcr.io/${{ github.repository }}
           tags: ${{ github.event.inputs.name }}
 
       # Build and push Docker image with Buildx (don't push on PR)
