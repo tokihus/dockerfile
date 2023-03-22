@@ -5,15 +5,13 @@ name: Docker
 # separate terms of service, privacy policy, and support
 # documentation.
 
-on:
-  schedule:
-    - cron: '23 9 * * *'
-  push:
-    branches: [ "master" ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
-  pull_request:
-    branches: [ "master" ]
+on:      
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Docker TAG"
+        required: true
+        default: "master"
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -26,6 +24,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    path: ./podman_kustomize/Dockerfile
     permissions:
       contents: read
       packages: write
