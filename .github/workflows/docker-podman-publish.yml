@@ -18,7 +18,9 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   #IMAGE_NAME: ${{ github.repository }}
-  IMAGE_NAME: podman_kustomize
+  IMAGE_NAME: "podman_kustomize"
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+
 
 jobs:
   build:
@@ -66,8 +68,7 @@ jobs:
         with:
           #images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           images: 
-            ${{ github.repository }}
-            ghcr.io/${{ github.repository }}
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           tags: ${{ github.event.inputs.name }}
 
       # Build and push Docker image with Buildx (don't push on PR)
@@ -79,7 +80,7 @@ jobs:
           # context: .
           context: ./podman_kustomize # Dockerfile 위치
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ github.event.inputs.name }} # ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
