@@ -11,14 +11,14 @@ on:
       name:
         description: "Docker TAG"
         required: true
-        default: "master"
+        default: "v1.0.0"
 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   #IMAGE_NAME: ${{ github.repository }}
-  IMAGE_NAME: "shclub/podman_kustomize"
+  IMAGE_NAME: "shclub/jre17-runtime"
   #IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
 
